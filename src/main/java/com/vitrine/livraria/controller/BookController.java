@@ -60,15 +60,15 @@ public class BookController {
 	}
 
 	@PutMapping("/book/{id}")
-	public ResponseEntity<Book> updateSensor(@PathVariable Long id, @RequestBody BookDto bookDto) {
+	public ResponseEntity<Book> updateBook(@PathVariable Long id, @RequestBody BookDto bookDto) {
 		return update.updateBook(id, bookDto);
 	}
 	
 	@DeleteMapping("/book/{id}")
-	public ResponseEntity<Map<String, Boolean>> deleteSensortype(@PathVariable Long id) {
-		Book sensortype = bookRepository.findById(id)
+	public ResponseEntity<Map<String, Boolean>> deleteBook(@PathVariable Long id) {
+		Book book = bookRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Book not exist with id :" + id));
-		bookRepository.delete(sensortype);
+		bookRepository.delete(book);
 		Map<String, Boolean> response = new HashMap<>();
 		response.put("deleted", Boolean.TRUE);
 		return ResponseEntity.ok(response);
