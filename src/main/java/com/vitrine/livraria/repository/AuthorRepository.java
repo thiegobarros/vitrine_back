@@ -7,5 +7,5 @@ import com.vitrine.livraria.models.Author;
 
 @Repository
 public interface AuthorRepository extends JpaRepository<Author, Long>  {
-
+	
 }

@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -20,6 +22,10 @@ public class Book implements Serializable{
 	
 	private String title;
 	private String isbn;
+	
+	@ManyToOne
+	@JoinColumn(name = "authorId", nullable = false)
+	private Author author;
 	
 	public Long getId() {
 		return id;
@@ -38,6 +44,12 @@ public class Book implements Serializable{
 	}
 	public void setIsbn(String isbn) {
 		this.isbn = isbn;
+	}
+	public Author getAuthor() {
+		return author;
+	}
+	public void setAuthor(Author author) {
+		this.author = author;
 	}
 	
 }

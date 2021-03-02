@@ -5,6 +5,7 @@ public class BookDto {
 	private Long id;
 	private String title;
 	private String isbn;
+	private Long authorId;
 	
 	public Long getId() {
 		return id;
@@ -24,6 +25,11 @@ public class BookDto {
 	public void setIsbn(String isbn) {
 		this.isbn = isbn;
 	}
-	
+	public Long getAuthorId() {
+		return authorId;
+	}
+	public void setAuthorId(Long authorId) {
+		this.authorId = authorId;
+	}
 	
 }
