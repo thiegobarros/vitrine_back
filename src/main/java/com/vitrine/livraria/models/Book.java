@@ -24,7 +24,6 @@ public class Book implements Serializable{
 	private String isbn;
 	
 	@ManyToOne
-	@JoinColumn(name = "authorId", nullable = false)
 	private Author author;
 	
 	public Long getId() {

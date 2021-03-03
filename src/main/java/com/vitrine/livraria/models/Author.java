@@ -1,15 +1,14 @@
 package com.vitrine.livraria.models;
 
 import java.io.Serializable;
-//import java.util.List;
+import java.util.List;
 
-//import javax.persistence.CascadeType;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-//import javax.persistence.JoinColumn;
-//import javax.persistence.OneToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -25,9 +24,8 @@ public class Author implements Serializable{
 	private String firstName;
 	private String lastName;
 	
-//	@OneToMany(cascade=CascadeType.ALL, orphanRemoval=true)
-//    @JoinColumn(name="author_id")
-//    private List<Book> accounts;
+	@OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
+    private List<Book> accounts;
 	
 	
 	public Long getId() {

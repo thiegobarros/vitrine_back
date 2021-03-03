@@ -80,11 +80,6 @@ public class BookController {
 		return ResponseEntity.ok(response);
 	}
 	
-	@GetMapping("/book/search/{param}")
-	public List<BookPresent> getBooksBySearch(@PathVariable String param) {
-		return bookConverter.toCollection(bookRepository.findByTitleLike("%"+param+"%"));
-	}
-	
 	@PostMapping("/book/vitrine")
 	public Page<Book> getBooksPages(@RequestBody VitrineDto vitrineDto) {
 		return vitrine.vitrinePagination(vitrineDto);

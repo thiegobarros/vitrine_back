@@ -23,7 +23,7 @@ public class BookVitrineService {
 				vitrineDto.getOrderBy().equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC,
 				"title");
 
-        Page<Book> pagedResult = bookRepository.findAll(paging);
+        Page<Book> pagedResult = bookRepository.search(vitrineDto.getParam(), paging);
 
         return pagedResult;
 	}

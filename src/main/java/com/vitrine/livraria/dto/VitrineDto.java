@@ -4,7 +4,14 @@ public class VitrineDto {
 	private Integer currentPage;
 	private Integer perPage;
 	private String orderBy;
+	private String param;
 	
+	public String getParam() {
+		return param;
+	}
+	public void setParam(String param) {
+		this.param = param;
+	}
 	public Integer getCurrentPage() {
 		return currentPage;
 	}
