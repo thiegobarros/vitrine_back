@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
 
 import com.vitrine.livraria.exception.ResourceNotFoundException;
@@ -24,9 +22,11 @@ import com.vitrine.livraria.models.Book;
 import com.vitrine.livraria.repository.BookRepository;
 import com.vitrine.livraria.converter.BookConverter;
 import com.vitrine.livraria.dto.BookDto;
+import com.vitrine.livraria.dto.VitrineDto;
 import com.vitrine.livraria.present.BookPresent;
 import com.vitrine.livraria.services.book.BookStoreService;
 import com.vitrine.livraria.services.book.BookUpdateService;
+import com.vitrine.livraria.services.book.BookVitrineService;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -41,6 +41,9 @@ public class BookController {
 	
 	@Autowired
 	private BookUpdateService update;
+	
+	@Autowired
+	private BookVitrineService vitrine;
 	
 	@Autowired
 	private BookConverter bookConverter;
@@ -77,24 +80,13 @@ public class BookController {
 		return ResponseEntity.ok(response);
 	}
 	
-	@GetMapping("/book/orderBy/{type}")
-	public List<BookPresent> getBooksByOrder(@PathVariable String type) {
-		if (type.equals("asc")) {			
-			return bookConverter.toCollection(bookRepository.findAllByOrderByTitleAsc());
-		}
-		return bookConverter.toCollection(bookRepository.findAllByOrderByTitleDesc()); 
-	}
-	
 	@GetMapping("/book/search/{param}")
 	public List<BookPresent> getBooksBySearch(@PathVariable String param) {
 		return bookConverter.toCollection(bookRepository.findByTitleLike("%"+param+"%"));
 	}
 	
-	@GetMapping("/book/pagination/{page}")
-	public Page<Book> getBooksPages(@PathVariable Integer page) {
-		Pageable paging = PageRequest.of(page-1, 6);
-        Page<Book> pagedResult = bookRepository.findAll(paging);
-
-        return pagedResult;
+	@PostMapping("/book/vitrine")
+	public Page<Book> getBooksPages(@RequestBody VitrineDto vitrineDto) {
+		return vitrine.vitrinePagination(vitrineDto);
 	}
 }
